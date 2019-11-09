@@ -1,3 +1,6 @@
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 class Triangle {
 
     private double a;
@@ -11,25 +14,34 @@ class Triangle {
         c = side3;
     }
     void triangleType() {
-        if ((a > 0 && b > 0 && c > 0) && (a + b > c && b + c > a && c + a > b)) {
-            flag = 0;
-            if ((a == b) && (b == c)) {
-                System.out.println("Triangle is Equilateral.");
-            }
-            else if ((a == b && b != c) || (b == c && a != c) || (c == a & b != a)){
-                System.out.println("Triangle is Isosceles.");
-            }
-            else if ((a != b) && (b != c) && (a != c)) {
-                System.out.println("Triangle is Scalene.");
-            }
+        double as = (new BigDecimal(a * a).setScale(1, RoundingMode.HALF_UP)).doubleValue();
+        double bs = (new BigDecimal(b * b).setScale(1, RoundingMode.HALF_UP)).doubleValue();
+        double cs = (new BigDecimal(c * c).setScale(1, RoundingMode.HALF_UP)).doubleValue();
 
-            if ((a*a + b*b == c*c) || (b*b + c*c == a*a) || (c*c + a*a == b*b)) {
-                System.out.println("Triangle is Right.");
-            }
+        if (!(a > 0 && b > 0 && c > 0)) {
+            flag = 1;
+            System.out.println("Error: Sides must be greater than 0.");
         }
         else {
-            flag = 1;
-            System.out.println("Triangle is Invalid.");
+            if (a + b > c && b + c > a && c + a > b) {
+                flag = 0;
+                if ((a == b) && (b == c)) {
+                    System.out.println("Triangle is Equilateral.");
+                }
+                else if ((a == b && b != c) || (b == c && a != c) || (c == a & b != a)) {
+                    System.out.println("Triangle is Isosceles.");
+                }
+                else if ((a != b) && (b != c) && (a != c)) {
+                    System.out.println("Triangle is Scalene.");
+                }
+                if ((as + bs == cs) || (bs + cs == as) || (cs + as == bs)) {
+                    System.out.println("Triangle is Right.");
+                }
+            }
+            else {
+                flag = 1;
+                System.out.println("Error: Triangle sides are invalid.");
+            }
         }
     }
     void getArea() {
