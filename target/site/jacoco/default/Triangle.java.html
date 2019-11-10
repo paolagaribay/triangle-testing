@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Triangle.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">project</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">Triangle.java</span></div><h1>Triangle.java</h1><pre class="source lang-java linenums">import java.math.BigDecimal;
+import java.math.RoundingMode;
+
+class Triangle {
+
+    private double a;
+    private double b;
+    private double c;
+    private int flag;
+
+<span class="fc" id="L11">    Triangle(double side1, double side2, double side3){</span>
+<span class="fc" id="L12">        a = side1;</span>
+<span class="fc" id="L13">        b = side2;</span>
+<span class="fc" id="L14">        c = side3;</span>
+<span class="fc" id="L15">    }</span>
+    void triangleType() {
+<span class="fc" id="L17">        double as = (new BigDecimal(a * a).setScale(1, RoundingMode.HALF_UP)).doubleValue();</span>
+<span class="fc" id="L18">        double bs = (new BigDecimal(b * b).setScale(1, RoundingMode.HALF_UP)).doubleValue();</span>
+<span class="fc" id="L19">        double cs = (new BigDecimal(c * c).setScale(1, RoundingMode.HALF_UP)).doubleValue();</span>
+
+<span class="pc bpc" id="L21" title="2 of 6 branches missed.">        if (!(a &gt; 0 &amp;&amp; b &gt; 0 &amp;&amp; c &gt; 0)) {</span>
+<span class="fc" id="L22">            flag = 1;</span>
+<span class="fc" id="L23">            System.out.println(&quot;Error: Sides must be greater than 0.&quot;);</span>
+        }
+        else {
+<span class="pc bpc" id="L26" title="2 of 6 branches missed.">            if (a + b &gt; c &amp;&amp; b + c &gt; a &amp;&amp; c + a &gt; b) {</span>
+<span class="fc" id="L27">                flag = 0;</span>
+<span class="fc bfc" id="L28" title="All 4 branches covered.">                if ((a == b) &amp;&amp; (b == c)) {</span>
+<span class="fc" id="L29">                    System.out.println(&quot;Triangle is Equilateral.&quot;);</span>
+                }
+<span class="pc bpc" id="L31" title="7 of 14 branches missed.">                else if ((a == b &amp;&amp; b != c) || (b == c &amp;&amp; a != c) || (c == a &amp; b != a)) {</span>
+<span class="fc" id="L32">                    System.out.println(&quot;Triangle is Isosceles.&quot;);</span>
+                }
+<span class="pc bpc" id="L34" title="3 of 6 branches missed.">                else if ((a != b) &amp;&amp; (b != c) &amp;&amp; (a != c)) {</span>
+<span class="fc" id="L35">                    System.out.println(&quot;Triangle is Scalene.&quot;);</span>
+                }
+<span class="pc bpc" id="L37" title="3 of 6 branches missed.">                if ((as + bs == cs) || (bs + cs == as) || (cs + as == bs)) {</span>
+<span class="nc" id="L38">                    System.out.println(&quot;Triangle is Right.&quot;);</span>
+                }
+            }
+            else {
+<span class="fc" id="L42">                flag = 1;</span>
+<span class="fc" id="L43">                System.out.println(&quot;Error: Triangle sides are invalid.&quot;);</span>
+            }
+        }
+<span class="fc" id="L46">    }</span>
+    void getArea() {
+<span class="fc" id="L48">        double s = (a + b + c)/2;</span>
+<span class="fc" id="L49">        double area = Math.sqrt(s*(s-a)*(s-b)*(s-c));</span>
+
+<span class="fc" id="L51">        String str = String.format(&quot;%.02f&quot;, area);</span>
+<span class="pc bpc" id="L52" title="1 of 2 branches missed.">        if (flag != 1) {</span>
+<span class="fc" id="L53">            System.out.println(&quot;Triangle area is &quot; + str + &quot;.&quot;);</span>
+        }
+<span class="fc" id="L55">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
